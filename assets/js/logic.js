@@ -11,65 +11,91 @@ let feedback = document.getElementById("feedback");
 let timeDisplay = document.getElementById("time");
 
 let currentQuestionIndex = 0;
+let timeLeft = 60; // Initial time for the quiz (adjust as needed)
+let timerInterval;
+let playerScore = 0;
+let scores = [];
 
 function loadQuestion() {
     var currentQuestion = quizQuestions[currentQuestionIndex];
     questionTitle.textContent = currentQuestion.question;
     choices.innerHTML = "";
 
-    currentQuestion.options.forEach(function(option) { //makes sure all options are shown at once
+    currentQuestion.options.forEach(function (option) {
         let optionItem = document.createElement("li");
         optionItem.textContent = option;
         optionItem.addEventListener("click", onOptionClick);
-        choices.appendChild(optionItem); //adds a new li for each option
+        choices.appendChild(optionItem);
     });
 }
 
 function onOptionClick() {
     let selectedAnswer = this.textContent;
     if (selectedAnswer === quizQuestions[currentQuestionIndex].correctAnswer) {
-        //correct answer  
-        feedback.textContent = "correct"; 
-        //score goes up
+        feedback.textContent = "Correct! Score +10";
+        playerScore += 10;
     } else {
-        //incorrect answer
-        feedback.textContent = "Incorrect"; 
-        //timer goes down by 10s
-        // timeLeft = timeLeft - 10;
-    };
-    setTimeout(function(){feedback.textContent = ""}, 1000); //replaces "correct" with empty string
-    currentQuestionIndex++;
-    if (currentQuestionIndex < quizQuestions.length) {
-        loadQuestion();
-    } else {
-        setTimeout(function(){feedback.textContent = "ALL DONE!!!"}, 1000); // Display a message for time's up           
-        endScreen.style.display = "block";
-        questionTitle.style.display = "none";
-        choices.style.display = "none";
-    };
-};
+        feedback.textContent = "Incorrect! Time -10s";
+        timeLeft -= 10;
+    }
 
+    document.getElementById("time").textContent = timeLeft;
 
-function countdown() {
-    var timeLeft = 50;
-    timeDisplay.textContent = timeLeft; // Set initial display
-
-    var timeInterval = setInterval(function () {
-        if (timeLeft > 0) {
-            timeDisplay.textContent = timeLeft;
-            timeLeft--;
+    setTimeout(function () {
+        feedback.textContent = "";
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizQuestions.length) {
+            loadQuestion();
         } else {
-            clearInterval(timeInterval); // Stop the timer
-            feedback.textContent = "Time's up!"; // Display a message for time's up           
-            endScreen.style.display = "block";
-            questionTitle.style.display = "none";
-            choices.style.display = "none";
+            clearInterval(timerInterval); // Stop the timer
+            displayFinalResults();
         }
     }, 1000);
 }
 
-  startButton.addEventListener("click", function(){
+function countdown() {
+    timerInterval = setInterval(function () {
+        if (timeLeft > 0) {
+            timeDisplay.textContent = timeLeft;
+            timeLeft--;
+        } else {
+            clearInterval(timerInterval);
+            feedback.textContent = "Time's up!";
+            endScreen.style.display = "block";
+            questionTitle.style.display = "none";
+            choices.style.display = "none";
+            displayFinalResults();
+        }
+    }, 1000);
+}
+
+function displayFinalResults() {
+    finalScore.textContent = playerScore;
+    timeDisplay.textContent = timeLeft; // Display the final time left
+    endScreen.style.display = "block";
+    questionTitle.style.display = "none";
+    choices.style.display = "none";
+}
+
+startButton.addEventListener("click", function () {
     startScreen.style.display = "none";
-    loadQuestion();   
-    countdown(); 
-})
+    loadQuestion();
+    countdown();
+});
+
+submitButton.addEventListener("click", function () {
+    let playerInitials = document.getElementById("initials").value;
+    
+
+    scores.push({
+        name: playerInitials,
+        score: playerScore,
+        time: timeLeft,
+    });
+
+    // Save the updated scores array in local storage
+    localStorage.setItem("scores", JSON.stringify(scores));
+
+    // Redirect to highscores.html after submitting the quiz
+    window.location.href = "highscores.html";
+});
