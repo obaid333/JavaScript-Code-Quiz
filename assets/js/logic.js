@@ -13,7 +13,7 @@ let timeDisplay = document.getElementById("time");
 let currentQuestionIndex = 0;
 
 function loadQuestion() {
-    let currentQuestion = quizQuestions[currentQuestionIndex];
+    var currentQuestion = quizQuestions[currentQuestionIndex];
     questionTitle.textContent = currentQuestion.question;
     choices.innerHTML = "";
 
@@ -35,6 +35,7 @@ function onOptionClick() {
         //incorrect answer
         feedback.textContent = "Incorrect"; 
         //timer goes down by 10s
+        // timeLeft = timeLeft - 10;
     };
     setTimeout(function(){feedback.textContent = ""}, 1000); //replaces "correct" with empty string
     currentQuestionIndex++;
@@ -46,23 +47,23 @@ function onOptionClick() {
     };
 };
 
-function countdown() {
-    var timeLeft = 100;
-  
-    var timeInterval = setInterval(function () {
 
-      if (timeLeft > 1) {
-        time.textContent = timeLeft;
-        timeLeft--;
-      } else if (timeLeft === 1) {
-        timerEl.textContent = timeLeft;
-        timeLeft--;
-      } else {
-        timerEl.textContent = "0";
-        clearInterval(timeInterval);
-      }
+function countdown() {
+    var timeLeft = 5;
+    timeDisplay.textContent = timeLeft; // Set initial display
+
+    var timeInterval = setInterval(function () {
+        if (timeLeft > 0) {
+            timeDisplay.textContent = timeLeft;
+            timeLeft--;
+        } else {
+            clearInterval(timeInterval); // Stop the timer
+            feedback.textContent = "Time's up!"; // Display a message for time's up
+            
+            endScreen.style.display = "block";
+        }
     }, 1000);
-  }
+}
 
   startButton.addEventListener("click", function(){
     startScreen.style.display = "none";
