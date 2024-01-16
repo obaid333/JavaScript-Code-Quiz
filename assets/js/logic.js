@@ -10,6 +10,9 @@ let submitButton = document.getElementById("submit");
 let feedback = document.getElementById("feedback");
 let timeDisplay = document.getElementById("time");
 
+let correctSound = document.getElementById("correctSound");
+let incorrectSound = document.getElementById("incorrectSound");
+
 let currentQuestionIndex = 0;
 let timeLeft = 60; // Initial time for the quiz (adjust as needed)
 let timerInterval;
@@ -34,9 +37,11 @@ function onOptionClick() {
     if (selectedAnswer === quizQuestions[currentQuestionIndex].correctAnswer) {
         feedback.textContent = "Correct! Score +10";
         playerScore += 10;
+        correctSound.play();
     } else {
         feedback.textContent = "Incorrect! Time -10s";
         timeLeft -= 10;
+        incorrectSound.play();
     }
 
     document.getElementById("time").textContent = timeLeft;
