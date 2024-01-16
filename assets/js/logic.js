@@ -36,6 +36,7 @@ function onOptionClick() {
         feedback.style.display = "Solid";
         feedback.textContent = "Incorrect"; 
     };
+    setTimeout(function(){feedback.textContent = ""}, 1000); //replaces "correct" with empty string
     currentQuestionIndex++;
     if (currentQuestionIndex < quizQuestions.length) {
         loadQuestion();
@@ -49,3 +50,5 @@ startButton.addEventListener("click", function(){
     startScreen.style.display = "none";
     loadQuestion();    
 })
+
+
