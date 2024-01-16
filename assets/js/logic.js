@@ -2,20 +2,32 @@ let questionDiv = document.getElementById("questions");
 let questionTitle = document.getElementById("question-title");
 let choices = document.getElementById("choices");
 let startScreen = document.getElementById("start-screen");
-let startButton = document.getElementById("startButton")
+let startButton = document.getElementById("startButton");
+let endScreen = document.getElementById("end-screen");
+let finalScore = document.getElementById("final-score");
+let initialsInput = document.getElementById("initials");
+let submitButton = document.getElementById("submit");
+let feedback = document.getElementById("feedback");
+let timeDisplay = document.getElementById("time");
 
+let currentQuestionIndex = 0;
 
+function loadQuestion() {
+    let currentQuestion = quizQuestions[currentQuestionIndex];
+    questionTitle.textContent = currentQuestion.question;
+    choices.innerHTML = "";
 
-for (var i = 0; i < quizQuestions.length; i++) {
-    questionTitle = quizQuestions[i];
-    
-    // if correct answer, go to next question, if incorrect, put timer down by 10s and go next question 
-    
-};
+    currentQuestion.options.forEach(function(option) { //makes sure all options are shown at once
+        let optionItem = document.createElement("li");
+        optionItem.textContent = option;
+        choices.appendChild(optionItem);
+    });
+}
 
 
 startButton.addEventListener("click", function(){
-    startScreen.innerHTML = "";
-    questionTitle.textContent = questionDiv[i] 
+    startScreen.style.display = "none";
+    loadQuestion();
     
 })
+
