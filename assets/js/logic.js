@@ -42,14 +42,16 @@ function onOptionClick() {
     if (currentQuestionIndex < quizQuestions.length) {
         loadQuestion();
     } else {
+        setTimeout(function(){feedback.textContent = "ALL DONE!!!"}, 1000); // Display a message for time's up           
         endScreen.style.display = "block";
-        // Additional logic for quiz completion if needed
+        questionTitle.style.display = "none";
+        choices.style.display = "none";
     };
 };
 
 
 function countdown() {
-    var timeLeft = 5;
+    var timeLeft = 50;
     timeDisplay.textContent = timeLeft; // Set initial display
 
     var timeInterval = setInterval(function () {
@@ -58,9 +60,10 @@ function countdown() {
             timeLeft--;
         } else {
             clearInterval(timeInterval); // Stop the timer
-            feedback.textContent = "Time's up!"; // Display a message for time's up
-            
+            feedback.textContent = "Time's up!"; // Display a message for time's up           
             endScreen.style.display = "block";
+            questionTitle.style.display = "none";
+            choices.style.display = "none";
         }
     }, 1000);
 }
