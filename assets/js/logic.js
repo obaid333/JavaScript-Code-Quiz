@@ -46,9 +46,26 @@ function onOptionClick() {
     };
 };
 
-startButton.addEventListener("click", function(){
+function countdown() {
+    var timeLeft = 100;
+  
+    var timeInterval = setInterval(function () {
+
+      if (timeLeft > 1) {
+        time.textContent = timeLeft;
+        timeLeft--;
+      } else if (timeLeft === 1) {
+        timerEl.textContent = timeLeft;
+        timeLeft--;
+      } else {
+        timerEl.textContent = "0";
+        clearInterval(timeInterval);
+      }
+    }, 1000);
+  }
+
+  startButton.addEventListener("click", function(){
     startScreen.style.display = "none";
-    loadQuestion();    
+    loadQuestion();   
+    countdown(); 
 })
-
-
