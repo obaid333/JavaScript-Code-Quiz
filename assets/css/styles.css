@@ -90,3 +90,18 @@ li:nth-child(odd) {
   top: 10px;
   right: 10px;
 }
+
+/* Add this CSS to your existing stylesheet or create a new one */
+
+/* Default styling for quiz options */
+#choices li {
+  cursor: pointer; /* Set the cursor to pointer for better indication of interactivity */
+  padding: 10px; /* Adjust padding for better spacing */
+  margin: 5px 0; /* Adjust margin for better spacing */
+  transition: background-color 0.3s; /* Smooth transition for the background color */
+}
+
+/* Hover effect for quiz options */
+#choices li:hover {
+  background-color: darkgrey; /* Change the background color on hover */
+}

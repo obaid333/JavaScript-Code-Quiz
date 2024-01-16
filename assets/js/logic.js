@@ -20,20 +20,13 @@ function loadQuestion() {
     currentQuestion.options.forEach(function(option) { //makes sure all options are shown at once
         let optionItem = document.createElement("li");
         optionItem.textContent = option;
+        optionItem.addEventListener("click", onOptionClick);
         choices.appendChild(optionItem); //adds a new li for each option
     });
 }
 
-
-startButton.addEventListener("click", function(){
-    startScreen.style.display = "none";
-    loadQuestion();
-    
-})
-
-choices.addEventListener("click", function() {
+function onOptionClick() {
     let selectedAnswer = this.textContent;
-
     if (selectedAnswer === quizQuestions[currentQuestionIndex].correctAnswer) {
         currentQuestionIndex++;
         if (currentQuestionIndex < quizQuestions.length) {
@@ -41,6 +34,12 @@ choices.addEventListener("click", function() {
         } else {
             endScreen.style.display = "block";
             // Additional logic for quiz completion if needed
-        }
-    }
-});
+        };
+    };
+};
+
+startButton.addEventListener("click", function(){
+    startScreen.style.display = "none";
+    loadQuestion();
+    
+})
