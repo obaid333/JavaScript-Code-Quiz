@@ -20,7 +20,7 @@ function loadQuestion() {
     currentQuestion.options.forEach(function(option) { //makes sure all options are shown at once
         let optionItem = document.createElement("li");
         optionItem.textContent = option;
-        choices.appendChild(optionItem);
+        choices.appendChild(optionItem); //adds a new li for each option
     });
 }
 
@@ -30,4 +30,12 @@ startButton.addEventListener("click", function(){
     loadQuestion();
     
 })
+
+
+
+if (currentQuestionIndex < 9) {
+    loadQuestion()
+}else {
+    endScreen.style.display = "block";
+}
 
