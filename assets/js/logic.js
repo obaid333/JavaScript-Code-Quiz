@@ -31,11 +31,16 @@ startButton.addEventListener("click", function(){
     
 })
 
+choices.addEventListener("click", function() {
+    let selectedAnswer = this.textContent;
 
-
-if (currentQuestionIndex < 9) {
-    loadQuestion()
-}else {
-    endScreen.style.display = "block";
-}
-
+    if (selectedAnswer === quizQuestions[currentQuestionIndex].correctAnswer) {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizQuestions.length) {
+            loadQuestion();
+        } else {
+            endScreen.style.display = "block";
+            // Additional logic for quiz completion if needed
+        }
+    }
+});
