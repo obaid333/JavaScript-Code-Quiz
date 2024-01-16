@@ -91,9 +91,6 @@ li:nth-child(odd) {
   right: 10px;
 }
 
-/* Add this CSS to your existing stylesheet or create a new one */
-
-/* Default styling for quiz options */
 #choices li {
   cursor: pointer; /* Set the cursor to pointer for better indication of interactivity */
   padding: 10px; /* Adjust padding for better spacing */

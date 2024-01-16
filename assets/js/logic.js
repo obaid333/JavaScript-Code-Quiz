@@ -28,18 +28,24 @@ function loadQuestion() {
 function onOptionClick() {
     let selectedAnswer = this.textContent;
     if (selectedAnswer === quizQuestions[currentQuestionIndex].correctAnswer) {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < quizQuestions.length) {
-            loadQuestion();
-        } else {
-            endScreen.style.display = "block";
-            // Additional logic for quiz completion if needed
-        };
+        //correct answer  
+        feedback.style.display = "solid";
+        feedback.textContent = "correct"; 
+    } else {
+        //incorrect answer
+        feedback.style.display = "Solid";
+        feedback.textContent = "Incorrect"; 
+    };
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizQuestions.length) {
+        loadQuestion();
+    } else {
+        endScreen.style.display = "block";
+        // Additional logic for quiz completion if needed
     };
 };
 
 startButton.addEventListener("click", function(){
     startScreen.style.display = "none";
-    loadQuestion();
-    
+    loadQuestion();    
 })
