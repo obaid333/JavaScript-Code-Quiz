@@ -29,12 +29,12 @@ function onOptionClick() {
     let selectedAnswer = this.textContent;
     if (selectedAnswer === quizQuestions[currentQuestionIndex].correctAnswer) {
         //correct answer  
-        feedback.style.display = "solid";
         feedback.textContent = "correct"; 
+        //score goes up
     } else {
         //incorrect answer
-        feedback.style.display = "Solid";
         feedback.textContent = "Incorrect"; 
+        //timer goes down by 10s
     };
     setTimeout(function(){feedback.textContent = ""}, 1000); //replaces "correct" with empty string
     currentQuestionIndex++;
