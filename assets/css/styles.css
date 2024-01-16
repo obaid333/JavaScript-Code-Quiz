@@ -62,6 +62,10 @@ li:nth-child(odd) {
   display: none;
 }
 
+.quizQuestions {
+  display: block;
+}
+
 .start {
   text-align: center;
 }
